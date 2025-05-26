@@ -13,70 +13,71 @@ from transformers import BatchEncoding, PreTrainedTokenizerFast
 
 
 class ConceptTokenizer:
-    """Tokenizer for event concepts using HuggingFace Library.
+    """使用 HuggingFace 库，对事件概念进行分词.
+    
+    依赖于本地文件：
+        1. data_dir 目录下读取 所有类型的 medical token;
+        2. code_dir 目录下 medical token 与 人类理解的语言之间的关系
 
-    Parameters
-    ----------
-    pad_token: str
-        Padding token.
-    mask_token: str
-        Mask token.
-    start_token: str
-        Sequence Start token. Models can use class token instead.
-    end_token: str
-        Sequence End token.
-    class_token: str
-        Class token.
-    reg_token: str
-        Registry token.
-    unknown_token: str
-        Unknown token.
-    data_dir: str
-        Directory containing the data.
-    time_tokens: List[str]
-        List of time-related special tokens.
-    tokenizer_object: Optional[Tokenizer]
-        Tokenizer object.
-    tokenizer: Optional[PreTrainedTokenizerFast]
-        Tokenizer object.
-    padding_side: str
-        Padding side.
+    Args:
+        pad_token: str
+            Padding token.
+        mask_token: str
+            Mask token.
+        start_token: str
+            Sequence Start token. Models can use class token instead.
+        end_token: str
+            Sequence End token.
+        class_token: str
+            Class token.
+        reg_token: str
+            Registry token.
+        unknown_token: str
+            Unknown token.
+        data_dir: str
+            Directory containing the data.
+        time_tokens: List[str]
+            List of time-related special tokens.
+        tokenizer_object: Optional[Tokenizer]
+            Tokenizer object.
+        tokenizer: Optional[PreTrainedTokenizerFast]
+            Tokenizer object.
+        padding_side: str
+            Padding side.
 
-    Attributes
-    ----------
-    pad_token: str
-        Padding token.
-    mask_token: str
-        Mask token.
-    start_token: str
-        Sequence Start token.
-    end_token: str
-        Sequence End token.
-    class_token: str
-        Class token.
-    reg_token: str
-        Registry token.
-    unknown_token: str
-        Unknown token.
-    task_tokens: List[str]
-        List of task-specific tokens.
-    tasks: List[str]
-        List of task names.
-    task2token: Dict[str, str]
-        Dictionary mapping task names to tokens.
-    special_tokens: List[str]
-        Special tokens including padding, mask, start, end, class, registry tokens.
-    tokenizer: PreTrainedTokenizerFast
-        HuggingFace fast tokenizer object.
-    tokenizer_object: Tokenizer
-        Tokenizer object from tokenizers library.
-    tokenizer_vocab: Dict[str, int]
-        Vocabulary mapping tokens to indices.
-    token_type_vocab: Dict[str, Any]
-        Vocabulary for token types.
-    data_dir: str
-        Directory containing data files.
-
+    Attributes:
+        pad_token: str
+            Padding token.
+        mask_token: str
+            Mask token.
+        start_token: str
+            Sequence Start token.
+        end_token: str
+            Sequence End token.
+        class_token: str
+            Class token.
+        reg_token: str
+            Registry token.
+        unknown_token: str
+            Unknown token.
+        task_tokens: List[str]
+            List of task-specific tokens.
+        tasks: List[str]
+            List of task names.
+        task2token: Dict[str, str]
+            Dictionary mapping task names to tokens.
+        special_tokens: List[str]
+            Special tokens including padding, mask, start, end, class, registry tokens.
+        tokenizer: PreTrainedTokenizerFast
+            HuggingFace fast tokenizer object.
+        tokenizer_object: Tokenizer
+            Tokenizer object from tokenizers library.
+        tokenizer_vocab: Dict[str, int]
+            Vocabulary mapping tokens to indices.
+        token_type_vocab: Dict[str, Any]
+            Vocabulary for token types.
+        data_dir: str
+            Directory containing data files.
     """
 
     def __init__(
@@ -588,4 +589,3 @@ class ConceptTokenizer:
 
         with open(save_path, "w") as vocab_file:
             json.dump(unique_tokens, vocab_file, indent=4)
-            
